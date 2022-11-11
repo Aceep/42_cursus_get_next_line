@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alycgaut <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:36:28 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/10 16:39:36 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:29:02 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define GET_NEXT_LINE_H
 
 # include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+
+# include <stdio.h>
+
 
 char	*get_next_line(int fd);
 

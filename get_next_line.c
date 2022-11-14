@@ -6,25 +6,24 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:27:27 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/11 18:51:40 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:27:58 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_read(int fd, char buffer)
+char	*ft_read(int fd, char *buffer)
 {
-	int	count;
 	char	buf[1];
-	int	i;
+	size_t	i;
+	size_t	count;
 
-	while (read(fd, buf, 1) > 0 && buf[0] != '\n' && count <= BUFFER_SIZE)
+	count = 0;
+	i = 0;
+	while (buf[0] != '\n' && count <= BUFFER_SIZE)
 	{
-		i = 0;
-		buffer[i ++] = buf[0];
 		read(fd, buf, 1);
-		if (buf[0] == '\n')
-			return (buffer);
+		buffer[i++] = buf[0];
 		count ++;
 	}
 	return (buffer);
@@ -38,7 +37,7 @@ char	*get_next_line(int fd)
 		return (0);
 	buffer = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (0);
+		return (NULL);
 	buffer = ft_read(fd, buffer);
 	return (buffer);
 }
@@ -48,6 +47,11 @@ int	main(void)
 	int	fd;
 
 	fd = open("test", O_RDONLY);
-	printf("%s", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
 	return (0);
 }

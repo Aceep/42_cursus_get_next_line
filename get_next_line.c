@@ -16,14 +16,17 @@ char	*ft_read(int fd, char *buffer)
 {
 	char	buf[1];
 	size_t	i;
-	size_t	count;
+	int	count;
 
-	count = 0;
+    read(fd, buf, 1);
+    if (buf[0] == '\n' || buf[0] == 0)
+        return (free(buffer), NULL);
+    count = 0;
 	i = 0;
 	while (buf[0] != '\n' && count <= BUFFER_SIZE)
 	{
 		read(fd, buf, 1);
-		buffer[i++] = buf[0];
+        buffer[i++] = buf[0];
 		count ++;
 	}
 	return (buffer);
@@ -33,8 +36,8 @@ char	*get_next_line(int fd)
 {
 	char	*buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+	if (fd == -1 || BUFFER_SIZE <= 0)
+		return (NULL);
 	buffer = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -42,16 +45,16 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int	fd;
+	char *gnlReturn;
 
-	fd = open("test", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
-	printf("%s\n", get_next_line(fd));
-	printf("%s\n", get_next_line(fd));
-	printf("%s\n", get_next_line(fd));
-	printf("%s\n", get_next_line(fd));
-	printf("%s\n", get_next_line(fd));
+	fd = open("empty", O_RDWR);
+	gnlReturn = get_next_line(fd);
+	if ( gnlReturn == NULL)
+		printf("Sucess\n");
+	else 
+		printf("%s", gnlReturn);
 	return (0);
-}
+}*/

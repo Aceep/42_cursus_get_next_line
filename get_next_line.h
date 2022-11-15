@@ -24,5 +24,7 @@
 
 
 char	*get_next_line(int fd);
+char	*ft_read(int fd, char *buffer);
+size_t	ft_strlen(const char *str);
 
 #endif

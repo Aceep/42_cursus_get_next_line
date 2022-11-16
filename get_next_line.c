@@ -12,49 +12,54 @@
 
 #include "get_next_line.h"
 
-char	*ft_read(int fd, char *buffer)
+char	*ft_read(int fd)
 {
-	char	buf[1];
+	char	*buffer;
 	size_t	i;
 	int	count;
-
-    read(fd, buf, 1);
-    if (buf[0] == '\n' || buf[0] == 0)
-        return (free(buffer), NULL);
-    count = 0;
-	i = 0;
-	while (buf[0] != '\n' && count <= BUFFER_SIZE)
+ 
+	count == 0;
+	if (fd == -1 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = (char *)malloc(char * BUFFER_SIZE);
+	if (!buffer)
+		return (NULL);
+	read(fd, buffer, BUFFER_SIZE);
+	count = ft_strchr(buffer, '/n');
+    if (count != 0)
 	{
-		read(fd, buf, 1);
-        buffer[i++] = buf[0];
-		count ++;
+		prev_read = ft_strdup(buffer, i, (BUFFER_SIZE - i));
+        buffer = ft_strdup(buffer, 0, count);
 	}
 	return (buffer);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
+	char	*line;
+	static char	*prev_read;
 
-	if (fd == -1 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	buffer = ft_read(fd, buffer);
-	return (buffer);
+	line = NULL;
+	if (prev_read)
+		line = find_next_line(prev_read);
+	else
+		line = ft_strjoin(ft_read(fd));
+	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	int	fd;
 	char *gnlReturn;
 
-	fd = open("empty", O_RDWR);
+	fd = /*open("test", O_RDWR)*/42;
 	gnlReturn = get_next_line(fd);
-	if ( gnlReturn == NULL)
-		printf("Sucess\n");
-	else 
+	if ((BUFFER_SIZE <= 0 && gnlReturn == NULL) || (fd < 0 && gnlReturn == NULL))
+		printf("Sucess for buffer size or wrong fd !");
+	while (gnlReturn)
+	{
 		printf("%s", gnlReturn);
+		gnlReturn = get_next_line(fd);
+	}
 	return (0);
-}*/
+}

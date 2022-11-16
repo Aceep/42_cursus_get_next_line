@@ -22,14 +22,14 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-size_t	ft_strchr(const char *s, int c)
+size_t	ft_strchr(const char *s, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i] != (char)c && s[i])
+	while (s[i] != c && s[i])
 		i ++;
-	if (s[i] == (char)c)
+	if (s[i] == c)
 		return (i);
 	return (0);
 }

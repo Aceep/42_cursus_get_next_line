@@ -21,7 +21,7 @@ int     ft_strchr(const char *s, int c)
 		i ++;
 	if (s[i] == (char)c)
 		return (i);
-	return (0);
+	return (-1);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

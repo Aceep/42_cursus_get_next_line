@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:36:28 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/16 19:54:37 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:43:37 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 
 char	*get_next_line(int fd);
-char	*ft_read(int fd, char *buffer, char *prev_read);
+char	*ft_read(int fd, char *buffer, char **prev_read);
 char	*ft_strjoin(char const *s1, char const *s2);
 int     ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

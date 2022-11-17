@@ -12,35 +12,42 @@
 
 #include "get_next_line.h"
 
-char	*ft_read(int fd, char *prev_read)
+char	*ft_read(int fd, char *buffer, char *prev_read)
 {
-	char	*buffer;
-	size_t	i;
-	
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	if (!buffer)
-		return (NULL);
-	read(fd, buffer, BUFFER_SIZE);
-    if (ft_strchr(buffer, '\n') != 0)
+	char	*line;
+	int	i;
+
+	i = 1;
+	if (prev_read)
+		line = ft_strdup(prev_read);
+	//printf("i = %d", ft_strchr(buffer, '\n'));
+	while (ft_strchr(buffer, '\n') == 0 && i == 1)
 	{
-		prev_read = ft_substr(buffer, i, (BUFFER_SIZE - i));
-        buffer = ft_substr(buffer, 0, ft_strchr(buffer, '\n'));
+		//printf("line = %s et buffer = %s et i = %d\n", line, buffer, ft_strchr(buffer, '\n'));
+		line = ft_strjoin(line, buffer);
+		i = read(fd, buffer, BUFFER_SIZE);
 	}
-	return (buffer);
+	prev_read = ft_substr(buffer, (ft_strchr(buffer, '\n') + 1), BUFFER_SIZE);
+	line = ft_strjoin(line, ft_substr(buffer, 0, (ft_strchr(buffer, '\n') + 1)));
+	//printf("line = %s et prev_read =%s", line, prev_read);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*line;
 	static char	*prev_read;
+	char	*buffer;
 
-	line = NULL;
-	//if (prev_read)
-	//	line = find_next_line(prev_read);
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd <= 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = ft_read(fd, prev_read);
-	return (line);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	//printf("ok\n");
+	if (!prev_read)
+		prev_read = ft_strdup("");
+	read(fd, buffer, BUFFER_SIZE);
+	return (ft_read(fd, buffer, prev_read));
 }
 
 

@@ -31,7 +31,7 @@ int	main(void)
 	char	*gnlReturn;
 	fd = open("test", O_RDONLY);
 	gnlReturn = get_next_line(fd);
-	while (gnlReturn)
+	while (gnlReturn != NULL && i <= 2)
 	{
 		printf("line %d = %s", i, gnlReturn);
 		gnlReturn = get_next_line(fd);

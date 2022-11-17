@@ -15,17 +15,15 @@
 char	*ft_read(int fd, char *buffer, char *prev_read)
 {
 	char	*line;
-	int	i;
 
-	i = 1;
 	if (prev_read)
 		line = ft_strdup(prev_read);
 	//printf("i = %d", ft_strchr(buffer, '\n'));
-	while (ft_strchr(buffer, '\n') == 0 && i == 1)
+	while (ft_strchr(buffer, '\n') == 0)
 	{
 		//printf("line = %s et buffer = %s et i = %d\n", line, buffer, ft_strchr(buffer, '\n'));
 		line = ft_strjoin(line, buffer);
-		i = read(fd, buffer, BUFFER_SIZE);
+		read(fd, buffer, BUFFER_SIZE);
 	}
 	prev_read = ft_substr(buffer, (ft_strchr(buffer, '\n') + 1), BUFFER_SIZE);
 	line = ft_strjoin(line, ft_substr(buffer, 0, (ft_strchr(buffer, '\n') + 1)));

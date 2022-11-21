@@ -15,6 +15,7 @@ int	main(void)
 {
 	int	fd;
 
+	fd = 0;
 	if (BUFFER_SIZE <= 0)
 	{
 		printf("Incorrect size of buffer : ");
@@ -31,7 +32,7 @@ int	main(void)
 	char	*gnlReturn;
 	fd = open("test", O_RDONLY);
 	gnlReturn = get_next_line(fd);
-	while (gnlReturn != NULL)
+	while (gnlReturn)
 	{
 		printf("line %d = %s", i, gnlReturn);
 		gnlReturn = get_next_line(fd);

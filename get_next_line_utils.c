@@ -12,14 +12,14 @@
 
 #include "get_next_line.h"
 
-int     ft_strchr(const char *s, int c)
+int     ft_strchr(const char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != (char)c && s[i])
+	while (s[i] != '\n' && s[i] != '\0')
 		i ++;
-	if (s[i] == (char)c)
+	if (s[i] == '\n')
 		return (i);
 	return (-1);
 }

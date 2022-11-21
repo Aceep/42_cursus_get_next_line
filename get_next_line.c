@@ -12,95 +12,107 @@
 
 #include "get_next_line.h"
 
-/*char	*ft_read(int fd, char *buffer, char **prev_read)
+int	ft_end_file(char *prev_read)
+{
+	int i;
+	i =0;
+	while (prev_read[i] != '\n' && prev_read[i] != '\0')
+		i ++;
+	if (prev_read[i] == '\n')
+		return (1);
+	return (0);
+}
+
+char	*get_line(char **prev_read)
 {
 	char	*line;
-	int	r;
+	int	i;
 
-	//printf("prev_read at start = %s\n", *prev_read);
-	if (ft_strchr(*prev_read, '\n') != -1)
-	{
-		line = ft_substr(*prev_read, 0, (ft_strchr(*prev_read, '\n') + 1));
-		*prev_read = ft_substr(*prev_read, (ft_strchr(*prev_read, '\n') + 1), BUFFER_SIZE);
-		//printf("line = %s et prev_read =%s\n", line, *prev_read);
-		return (line);
-	}
-	else if (prev_read)
-		line = ft_strdup(*prev_read);
-	//printf("i = %d", ft_strchr(buffer, '\n'));
-	r = read(fd, buffer, BUFFER_SIZE);
-	printf("%d\n", r);
-	while (r > 0)
-	{
-		while (ft_strchr(buffer, '\n') == -1)
-		{
-			printf("line = %s et buffer = %s et i = %d\n", line, buffer, ft_strchr(buffer, '\n'));
-			line = ft_strjoin(line, buffer);
-			r = read(fd, buffer, BUFFER_SIZE);
-		}
-		*prev_read = ft_substr(buffer, (ft_strchr(buffer, '\n') + 1), BUFFER_SIZE);
-		line = ft_strjoin(line, ft_substr(buffer, 0, (ft_strchr(buffer, '\n') + 1)));
-		//printf("line = %s et prev_read =%s\n", line, *prev_read);
-		len = ft_strlen(line);
-		line[len] = '\0';
-		return (line);
-	}
-	//free(*prev_read);
-	return (NULL);
-}*/
-
-char	*ft_read(int fd, char *buffer, char **prev_read)
-{
-	char	*line;
-	int	len;
-	int	r;
-
-	if (*prev_read)
-	{
-		if (ft_strchr(*prev_read, '\n') != -1)
-		{
-			line = ft_substr(*prev_read, 0, ft_strchr(*prev_read, '\n' + 1));
-			*prev_read = ft_substr(*prev_read, ft_strchr(*prev_read, '\n' + 1), BUFFER_SIZE);
-			return (line);
-		}
-		else if (ft_strchr(*prev_read, '\0') != -1)
-		{
-			line = ft_strdup(*prev_read);
-			free(*prev_read);
-			return (line);
-		}
-		line = ft_strdup(*prev_read);
-	}
-	r = read(fd, buffer, BUFFER_SIZE);
-	printf("%d\n", r);
-	if (!*prev_read && r <= 0)
+	if (!prev_read)
 		return (NULL);
-	while (ft_strchr(buffer, '\n') == -1)
+	i = ft_strchr(*prev_read);
+	line = ft_substr(*prev_read, 0, (i + ft_end_file(*prev_read)));
+	if (!line)
 	{
-		line = ft_strjoin(line, buffer);
-		r = read(fd, buffer, BUFFER_SIZE);
+		free (line);
+		return (NULL);
 	}
-	*prev_read = ft_substr(buffer, (ft_strchr(buffer, '\n') + 1), BUFFER_SIZE);
-	line = ft_strjoin(line, ft_substr(buffer, 0, (ft_strchr(buffer, '\n') + 1)));
-	len = ft_strlen(line);
-	line[len] = '\0';
 	return (line);
+}
+
+char	*get_end(char **prev_read)
+{
+	char	*p_read;
+	int	i;
+
+	if (!prev_read)
+		return (NULL);
+	i = ft_strchr(*prev_read);
+	if ((*prev_read)[i] == '\0')
+	{
+		free (*prev_read);
+		return (NULL);
+	}
+	p_read = ft_substr(*prev_read, i + 1, ft_strlen(*prev_read) - i);
+	if (!p_read)
+	{
+		free (p_read);
+		return (NULL);
+	}
+	i ++;
+	free (*prev_read);
+	return (p_read);
+}
+
+int	ft_read(int fd, char **buffer, char **line, char **prev_read)
+{
+		int	b_read;
+		char *tmp;
+
+		b_read = 1;
+		while (ft_strchr(*prev_read) == -1 && b_read > 0)
+		{
+			b_read = read(fd, *buffer, BUFFER_SIZE);
+			(*buffer)[b_read] = '\0';
+			tmp = *prev_read;
+			*prev_read = ft_strjoin(tmp, *buffer);
+			free (tmp);
+		}
+		free (*buffer);
+		*line = get_line(prev_read);
+		if (**line == '\0')
+		{
+			free (*line);
+			*line = NULL;
+		}
+		*prev_read = get_end(prev_read);
+		return (b_read);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*prev_read;
 	char	*buffer;
+	int	b_read;
+	char	*line;
 
-	if (fd <= 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) <= 0)
-		return (printf("here");NULL);
+	if (fd <= 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
+	if (read(fd, buffer, 0) < 0)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	if (!prev_read)
 		prev_read = ft_strdup("");
-	printf("prev_read = %s\n", prev_read);
-	return (ft_read(fd, buffer, &prev_read));
+	b_read = ft_read(fd, &buffer, &line, &prev_read);
+	if (b_read == 0 && !line)
+		return (NULL);
+	//printf("line = %s et prev_read =%s\n\n", line, prev_read);
+	return (line);
 }
 
 

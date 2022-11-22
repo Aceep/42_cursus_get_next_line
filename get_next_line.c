@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 		prev_read = ft_strdup("");
 	b_read = ft_read(fd, &buffer, &line, &prev_read);
 	if (b_read == 0 && !line)
-		return ( NULL);
+		return (NULL);
 	//printf("len of line : %ld et len of prev : %ld", ft_strlen(line), ft_strlen(prev_read));
 	return (line);
 }

@@ -22,6 +22,7 @@ void	check_error(int fd)
 		printf("OK\n");
 	else
 		printf("Erreur\n");
+	free (gnlreturn);
 }
 
 void	with_files(void)
@@ -31,7 +32,7 @@ void	with_files(void)
 	char	*gnlreturn;
 
 	i = 1;
-	/*fd = open("bible.txt", O_RDONLY);
+	fd = open("test_files/bible.txt", O_RDONLY);
 	gnlreturn = get_next_line(fd);
 	while (gnlreturn)
 	{
@@ -39,8 +40,8 @@ void	with_files(void)
 		gnlreturn = get_next_line(fd);
 		i ++;
 	}
-	i = 1;*/
-	fd = open("test", O_RDONLY);
+	i = 1;
+	fd = open("test_files/test", O_RDONLY);
 	gnlreturn = get_next_line(fd);
 	while (gnlreturn)
 	{
@@ -48,6 +49,7 @@ void	with_files(void)
 		gnlreturn = get_next_line(fd);
 		i ++;
 	}
+	free (gnlreturn);
 	return ;
 }
 
@@ -63,7 +65,7 @@ int	main(void)
 		check_error(fd);
 		return (0);
 	}
-	fd = open("empty", O_RDWR);
+	fd = open("test_files/empty", O_RDWR);
 	printf("Fichier vide : ");
 	check_error(fd);
 	fd = 42;
@@ -72,6 +74,7 @@ int	main(void)
 	fd = 0;
 	gnlreturn = get_next_line(fd);
 	printf("line = %s", gnlreturn);
+	free (gnlreturn);
 	with_files();
-	return (free(gnlreturn), 0);
+	return (0);
 }

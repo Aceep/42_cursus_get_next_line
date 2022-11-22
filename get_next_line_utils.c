@@ -114,11 +114,12 @@ char	*ft_strdup(const char *str)
 	return (cpy);
 }
 
-/*int	main(void)
+/*
+int	main(void)
 {
 	char	*test;
 
-	test = ft_strdup("Hebert's on your right !");
+	test = ft_substr("Hebert's on your right !", 2, 12);
 	printf("%s", test);
 	return (free(test), 0);
 }*/

@@ -90,7 +90,7 @@ int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 
 char	*get_next_line(int fd)
 {
-	static char	*prev_read[10];
+	static char	*prev_read[1023];
 	char		*buffer;
 	int			b_read;
 	char		*line;

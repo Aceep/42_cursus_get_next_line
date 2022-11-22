@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:36:28 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 16:40:36 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/22 18:25:58 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-
-# include <stdio.h>
-
-
 char	*get_next_line(int fd);
-int ft_read(int fd, char **buffer, char **line, char **prev_read);
+int		ft_read(int fd, char **buffer, char **line, char **prev_read);
 char	*ft_strjoin(char *s1, char *s2);
-int     ft_strchr(const char *s);
+int		ft_strchr(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char *str);

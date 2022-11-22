@@ -1,6 +1,18 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alycgaut <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/22 18:46:07 by alycgaut          #+#    #+#             */
+/*   Updated: 2022/11/22 18:46:09 by alycgaut         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int     ft_strchr(const char *s)
+#include "get_next_line_bonus.h"
+
+int	ft_strchr(const char *s)
 {
 	int	i;
 

@@ -1,9 +1,22 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/22 18:22:35 by alycgaut          #+#    #+#             */
+/*   Updated: 2022/11/22 18:33:24 by alycgaut         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 int	ft_end_file(char *prev_read)
 {
-	int i;
-	i =0;
+	int	i;
+
+	i = 0;
 	while (prev_read[i] != '\n' && prev_read[i] != '\0')
 		i ++;
 	if (prev_read[i] == '\n')
@@ -14,7 +27,7 @@ int	ft_end_file(char *prev_read)
 char	*get_line(char **prev_read)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	if (!prev_read)
 		return (NULL);
@@ -31,7 +44,7 @@ char	*get_line(char **prev_read)
 char	*get_end(char **prev_read)
 {
 	char	*p_read;
-	int	i;
+	int		i;
 
 	if (!prev_read)
 		return (NULL);
@@ -53,34 +66,34 @@ char	*get_end(char **prev_read)
 
 int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 {
-		int	b_read;
+	int	b_read;
 
-		b_read = 1;
-		while (ft_strchr(*prev_read) == -1 && b_read > 0)
-		{
-			b_read = read(fd, *buffer, BUFFER_SIZE);
-			if (b_read < 0)
-				return ( 0);
-			(*buffer)[b_read] = '\0';
-			*prev_read = ft_strjoin(*prev_read, *buffer);
-		}
-		free (*buffer);
-		*line = get_line(prev_read);
-		if (**line == '\0')
-		{
-			free (*line);
-			*line = NULL;
-		}
-		*prev_read = get_end(prev_read);
-		return (b_read);
+	b_read = 1;
+	while (ft_strchr(*prev_read) == -1 && b_read > 0)
+	{
+		b_read = read(fd, *buffer, BUFFER_SIZE);
+		if (b_read < 0)
+			return (0);
+		(*buffer)[b_read] = '\0';
+		*prev_read = ft_strjoin(*prev_read, *buffer);
+	}
+	free (*buffer);
+	*line = get_line(prev_read);
+	if (**line == '\0')
+	{
+		free (*line);
+		*line = NULL;
+	}
+	*prev_read = get_end(prev_read);
+	return (b_read);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*prev_read[10];
-	char	*buffer;
-	int	b_read;
-	char	*line;
+	char		*buffer;
+	int			b_read;
+	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)

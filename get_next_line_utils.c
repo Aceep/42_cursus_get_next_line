@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alycgaut <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:27:27 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/14 16:27:58 by alycgaut         ###   ########.fr       */
+/*   Created: 2022/11/22 18:45:58 by alycgaut          #+#    #+#             */
+/*   Updated: 2022/11/22 18:46:00 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int     ft_strchr(const char *s)
+int	ft_strchr(const char *s)
 {
 	int	i;
 

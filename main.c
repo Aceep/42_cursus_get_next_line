@@ -1,19 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/22 18:36:11 by alycgaut          #+#    #+#             */
+/*   Updated: 2022/11/22 18:49:00 by alycgaut         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
+#include <stdio.h>
 
 void	check_error(int fd)
 {
-	char	*gnlReturn;
+	char	*gnlreturn;
 
-	gnlReturn = get_next_line(fd);
-	if (gnlReturn == NULL)
+	gnlreturn = get_next_line(fd);
+	if (gnlreturn == NULL)
 		printf("OK\n");
 	else
 		printf("Erreur\n");
 }
 
+void	with_files(void)
+{
+	int		i;
+	int		fd;
+	char	*gnlreturn;
+
+	i = 1;
+	/*fd = open("bible.txt", O_RDONLY);
+	gnlreturn = get_next_line(fd);
+	while (gnlreturn)
+	{
+		printf("line %d = %s", i, gnlreturn);
+		gnlreturn = get_next_line(fd);
+		i ++;
+	}
+	i = 1;*/
+	fd = open("test", O_RDONLY);
+	gnlreturn = get_next_line(fd);
+	while (gnlreturn)
+	{
+		printf("line %d = %s", i, gnlreturn);
+		gnlreturn = get_next_line(fd);
+		i ++;
+	}
+	return ;
+}
+
 int	main(void)
 {
-	int	fd;
+	int		fd;
+	char	*gnlreturn;
 
 	fd = 0;
 	if (BUFFER_SIZE <= 0)
@@ -28,32 +69,9 @@ int	main(void)
 	fd = 42;
 	printf("Incorrect fd : ");
 	check_error(fd);
-	int i = 1;
-	char	*gnlReturn;
-	fd = open("bible.txt", O_RDONLY);
-	gnlReturn = get_next_line(fd);
-	while (gnlReturn)
-	{
-		printf("line %d = %s", i, gnlReturn);
-		gnlReturn = get_next_line(fd);
-		i ++;
-	}
-	fd = open("test", O_RDONLY);
-	gnlReturn = get_next_line(fd);
-	while (gnlReturn)
-	{
-		printf("line %d = %s", i, gnlReturn);
-		gnlReturn = get_next_line(fd);
-		i ++;
-	}
 	fd = 0;
-	gnlReturn = get_next_line(fd);
-	while (gnlReturn)
-	{
-		printf("line %d = %s", i, gnlReturn);
-		gnlReturn = get_next_line(fd);
-		i ++;
-	}
-	
+	gnlreturn = get_next_line(fd);
+	printf("line = %s", gnlreturn);
+	with_files();
 	return (0);
 }

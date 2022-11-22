@@ -24,7 +24,7 @@ int     ft_strchr(const char *s)
 	return (-1);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	char	*dst;
@@ -49,6 +49,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j ++;
 	}
 	dst[i] = '\0';
+	free (s1);
 	return (dst);
 }
 

@@ -30,6 +30,14 @@ int	main(void)
 	check_error(fd);
 	int i = 1;
 	char	*gnlReturn;
+	fd = open("bible.txt", O_RDONLY);
+	gnlReturn = get_next_line(fd);
+	while (gnlReturn)
+	{
+		printf("line %d = %s", i, gnlReturn);
+		gnlReturn = get_next_line(fd);
+		i ++;
+	}
 	fd = open("test", O_RDONLY);
 	gnlReturn = get_next_line(fd);
 	while (gnlReturn)
@@ -38,7 +46,14 @@ int	main(void)
 		gnlReturn = get_next_line(fd);
 		i ++;
 	}
-	//printf("%s", gnlReturn);
+	fd = 0;
+	gnlReturn = get_next_line(fd);
+	while (gnlReturn)
+	{
+		printf("line %d = %s", i, gnlReturn);
+		gnlReturn = get_next_line(fd);
+		i ++;
+	}
 	
 	return (0);
 }

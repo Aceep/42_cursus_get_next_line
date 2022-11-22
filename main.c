@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:36:11 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 18:49:00 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:23:34 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int	main(void)
 	gnlreturn = get_next_line(fd);
 	printf("line = %s", gnlreturn);
 	with_files();
-	return (0);
+	return (free(gnlreturn), 0);
 }

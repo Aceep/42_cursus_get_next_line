@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alycgaut <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:45:58 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 18:46:00 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:23:59 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,16 @@ size_t	ft_strlen(const char *str)
 
 char	*ft_strdup(const char *str)
 {
-	int		len;
+	size_t	len;
 	char	*cpy;
-	int		i;
+	size_t		i;
 
 	i = 0;
-	len = ft_strlen(str);
-	cpy = (char *)malloc((len + 1) * sizeof(char));
-	if (cpy == NULL)
+	if (!str)
+		return (NULL);
+	len = ft_strlen(str) + 1;
+	cpy = (char *)malloc(len);
+	if (!cpy)
 		return (NULL);
 	while (str[i])
 	{
@@ -111,3 +113,12 @@ char	*ft_strdup(const char *str)
 	cpy[i] = '\0';
 	return (cpy);
 }
+
+/*int	main(void)
+{
+	char	*test;
+
+	test = ft_strdup("Hebert's on your right !");
+	printf("%s", test);
+	return (free(test), 0);
+}*/

@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:27:27 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 18:34:47 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:38:40 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_next_line(int fd)
 	int			b_read;
 	char		*line;
 
-	line = NULL;
+	//line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -105,6 +105,7 @@ char	*get_next_line(int fd)
 		prev_read = ft_strdup("");
 	b_read = ft_read(fd, &buffer, &line, &prev_read);
 	if (b_read == 0 && !line)
-		return (NULL);
+		return ( NULL);
+	//printf("len of line : %ld et len of prev : %ld", ft_strlen(line), ft_strlen(prev_read));
 	return (line);
 }

@@ -70,6 +70,7 @@ int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 		char *tmp;
 
 		b_read = 1;
+		
 		while (ft_strchr(*prev_read) == -1 && b_read > 0)
 		{
 			b_read = read(fd, *buffer, BUFFER_SIZE);
@@ -96,16 +97,12 @@ char	*get_next_line(int fd)
 	int	b_read;
 	char	*line;
 
+	line = NULL;
 	if (fd <= 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	if (read(fd, buffer, 0) < 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
+	if (!buffer || read(fd, buffer, 0) < 0)
+		return (free(prev_read), NULL);
 	if (!prev_read)
 		prev_read = ft_strdup("");
 	b_read = ft_read(fd, &buffer, &line, &prev_read);

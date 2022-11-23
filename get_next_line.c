@@ -95,7 +95,6 @@ char	*get_next_line(int fd)
 	int			b_read;
 	char		*line;
 
-	//line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -106,6 +105,5 @@ char	*get_next_line(int fd)
 	b_read = ft_read(fd, &buffer, &line, &prev_read);
 	if (b_read == 0 && !line)
 		return (NULL);
-	//printf("len of line : %ld et len of prev : %ld", ft_strlen(line), ft_strlen(prev_read));
 	return (line);
 }

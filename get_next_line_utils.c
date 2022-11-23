@@ -96,7 +96,7 @@ char	*ft_strdup(const char *str)
 {
 	size_t	len;
 	char	*cpy;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	if (!str)

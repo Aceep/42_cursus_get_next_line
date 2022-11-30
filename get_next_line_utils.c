@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:45:58 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 19:23:59 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:53:37 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,11 @@ char	*ft_strdup(const char *str)
 	return (cpy);
 }
 
-/*
-int	main(void)
+/*int	main(void)
 {
 	char	*test;
 
-	test = ft_substr("Hebert's on your right !", 2, 12);
+	test = ft_strdup("Hebert's on your right !");
 	printf("%s", test);
 	return (free(test), 0);
 }*/

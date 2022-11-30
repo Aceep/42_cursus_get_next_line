@@ -6,12 +6,15 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:23:16 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 18:31:26 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:57:54 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>

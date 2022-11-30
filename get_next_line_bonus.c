@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:22:35 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 18:33:24 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:00:25 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 
 char	*get_next_line(int fd)
 {
-	static char	*prev_read[1023];
+	static char	*prev_read[1048576];
 	char		*buffer;
 	int			b_read;
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1048576)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer || read(fd, buffer, 0) < 0)

@@ -6,11 +6,11 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:36:11 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 19:23:34 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:10:31 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 
 void	check_error(int fd)
@@ -22,7 +22,6 @@ void	check_error(int fd)
 		printf("OK\n");
 	else
 		printf("Erreur\n");
-	free (gnlreturn);
 }
 
 void	with_files(void)
@@ -32,7 +31,7 @@ void	with_files(void)
 	char	*gnlreturn;
 
 	i = 1;
-	fd = open("test_files/bible.txt", O_RDONLY);
+	fd = open("bible.txt", O_RDONLY);
 	gnlreturn = get_next_line(fd);
 	while (gnlreturn)
 	{
@@ -41,7 +40,7 @@ void	with_files(void)
 		i ++;
 	}
 	i = 1;
-	fd = open("test_files/test", O_RDONLY);
+	fd = open("test", O_RDONLY);
 	gnlreturn = get_next_line(fd);
 	while (gnlreturn)
 	{
@@ -49,8 +48,36 @@ void	with_files(void)
 		gnlreturn = get_next_line(fd);
 		i ++;
 	}
-	free (gnlreturn);
 	return ;
+}
+
+void	bonus(void)
+{
+	int		i;
+	int		fd1;
+	char	*gnlreturn1;
+	int		fd2;
+	char	*gnlreturn2;
+
+	i = 1;
+	fd1 = open("test", O_RDONLY);
+	fd2 = open("test2", O_RDONLY);
+	gnlreturn1 = get_next_line(fd1);
+	gnlreturn2 = get_next_line(fd2);
+	while (gnlreturn1 || gnlreturn2)
+	{
+		if (gnlreturn1)
+			printf("line %d du fichier 1= %s\n", i, gnlreturn1);
+		else
+			printf("\n");
+		if (gnlreturn2)
+			printf("line %d du fichier 2= %s\n", i, gnlreturn2);
+		else
+			printf("\n");
+		gnlreturn1 = get_next_line(fd1);
+		gnlreturn2 = get_next_line(fd2);
+		i ++;
+	}
 }
 
 int	main(void)
@@ -65,7 +92,7 @@ int	main(void)
 		check_error(fd);
 		return (0);
 	}
-	fd = open("test_files/empty", O_RDWR);
+	fd = open("empty", O_RDWR);
 	printf("Fichier vide : ");
 	check_error(fd);
 	fd = 42;
@@ -74,7 +101,7 @@ int	main(void)
 	fd = 0;
 	gnlreturn = get_next_line(fd);
 	printf("line = %s", gnlreturn);
-	free (gnlreturn);
 	with_files();
-	return (0);
+	bonus();
+	return (free(gnlreturn), 0);
 }

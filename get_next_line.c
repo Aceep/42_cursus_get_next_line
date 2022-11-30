@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:27:27 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/22 19:38:40 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:54:06 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*get_next_line(int fd)
 	int			b_read;
 	char		*line;
 
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));

@@ -73,7 +73,7 @@ int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 	{
 		b_read = read(fd, *buffer, BUFFER_SIZE);
 		if (b_read <= 0)
-			return (free(buffer), 0);
+			return (free(*buffer), 0);
 		(*buffer)[b_read] = '\0';
 		*prev_read = ft_strjoin(*prev_read, *buffer);
 	}
@@ -100,11 +100,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (free(buffer), free(*prev_read), NULL);
+		return (NULL);
 	if (!prev_read[fd])
 		prev_read[fd] = ft_strdup("");
 	b_read = ft_read(fd, &buffer, &line, &prev_read[fd]);
 	if (b_read == 0 && !line)
-		return (free(line), NULL);
+		return (NULL);
 	return (line);
 }

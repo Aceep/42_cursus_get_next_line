@@ -31,14 +31,14 @@ void	with_files(void)
 	char	*gnlreturn;
 
 	i = 1;
-	fd = open("bible.txt", O_RDONLY);
+	/*fd = open("bible.txt", O_RDONLY);
 	gnlreturn = get_next_line(fd);
 	while (gnlreturn)
 	{
 		printf("line %d = %s", i, gnlreturn);
 		gnlreturn = get_next_line(fd);
 		i ++;
-	}
+	}*/
 	i = 1;
 	fd = open("test", O_RDONLY);
 	gnlreturn = get_next_line(fd);
@@ -83,7 +83,7 @@ void	bonus(void)
 int	main(void)
 {
 	int		fd;
-	char	*gnlreturn;
+	//char	*gnlreturn;
 
 	fd = 0;
 	if (BUFFER_SIZE <= 0)
@@ -95,13 +95,15 @@ int	main(void)
 	fd = open("empty", O_RDWR);
 	printf("Fichier vide : ");
 	check_error(fd);
+	close(fd);
 	fd = 42;
 	printf("Incorrect fd : ");
 	check_error(fd);
-	fd = 0;
-	gnlreturn = get_next_line(fd);
-	printf("line = %s", gnlreturn);
-	with_files();
-	bonus();
-	return (free(gnlreturn), 0);
+	close(fd);
+	// fd = 0;
+	// gnlreturn = get_next_line(fd);
+	// printf("line = %s", gnlreturn);
+	//with_files();
+	//bonus();
+	return (/*free(gnlreturn),*/ 0);
 }

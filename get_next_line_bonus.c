@@ -6,7 +6,7 @@
 /*   By: alycgaut <alycgaut@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:22:35 by alycgaut          #+#    #+#             */
-/*   Updated: 2022/11/30 17:00:25 by alycgaut         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:32:24 by alycgaut         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	ft_read(int fd, char **buffer, char **line, char **prev_read)
 	while (ft_strchr(*prev_read) == -1 && b_read > 0)
 	{
 		b_read = read(fd, *buffer, BUFFER_SIZE);
-		if (b_read < 0)
-			return (0);
+		if (b_read <= 0)
+			return (free(buffer), 0);
 		(*buffer)[b_read] = '\0';
 		*prev_read = ft_strjoin(*prev_read, *buffer);
 	}
@@ -99,12 +99,12 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1048576)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer || read(fd, buffer, 0) < 0)
+	if (!buffer)
 		return (free(buffer), free(*prev_read), NULL);
 	if (!prev_read[fd])
 		prev_read[fd] = ft_strdup("");
 	b_read = ft_read(fd, &buffer, &line, &prev_read[fd]);
 	if (b_read == 0 && !line)
-		return (NULL);
+		return (free(line), NULL);
 	return (line);
 }
